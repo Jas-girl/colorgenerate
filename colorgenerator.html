@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Generator</title>
+    <style>
+        body{
+            background-image: linear-gradient(to right, #000000,#111111);
+            color:white;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height:100vh;
+        }
+        .container{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height:100vh;
+        }
+        .button-body{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            gap:20px;
+        }
+        .container button{
+            padding: 10px;
+            background-color: white;
+            color:black;
+            border:none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .container p{
+            margin-bottom: 20px;
+        }
+        .copytext{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: transparent; 
+            color:white;
+            padding: 10px;
+            border-left: 2px solid white;
+            border-radius: 5px;
+            width:300px;
+            height:100px;
+            margin-bottom: 20px;
+        }
+        .copytext p{
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="btn-body">
+            <button id="btn1">#000000</button>
+            <button id="btn2">#111111</button>
+        </div>
+       
+        <p>Click here to copy the text</p>
+        <div class="copytext">
+            <p>background-image:"linear-gradient(to right, #000000,#111111)</p>
+        </div>
+    </div>
+    <script>
+        let btn1=document.getElementById('btn1');
+        let btn2=document.getElementById('btn2');
+        let copy= document.querySelector('.copytext');
+       
+        let rgb1="#fff";
+        let rgb2="#fff";
+        const handleChange=()=>{
+            let hexaDecimal="0123456789abcdef";
+            let code="#";
+            for(i=1;i<=6;i++){
+               
+                 code=code+hexaDecimal[Math.floor(Math.random()*16)];    
+            }
+            console.log(code);
+            return code;
+           
+           
+        }
+        const BtnFn1=()=>{
+             rgb1=handleChange();
+             console.log(rgb1);
+            btn1.innerText=rgb1;
+            document.body.style.backgroundImage=`linear-gradient(to right, ${rgb1},${rgb2})`;
+            copy.innerHTML=`background-image:"linear-gradient(to right, ${rgb1},${rgb2})`
+
+        }
+        const BtnFn2=()=>{
+              rgb2=handleChange();
+             console.log(rgb2)
+            btn2.innerText=rgb2;
+            document.body.style.backgroundImage=`linear-gradient(to right,${rgb1},${rgb2})`;
+            copy.innerText=`background-image:"linear-gradient(to right, ${rgb1},${rgb2})`
+        }
+        btn1.addEventListener('click',BtnFn1);
+        btn2.addEventListener('click',BtnFn2)
+        copy.addEventListener('click',()=>{
+            navigator.clipboard.writeText(copy.innerText);
+  
+  // Alert the copied text
+  alert( copy.innerText);
+        })
+      
+    </script>
+</body>
+</html>
